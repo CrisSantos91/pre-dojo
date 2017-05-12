@@ -12,27 +12,29 @@ module PreDojo
       @end_time = end_time
       @players = []
       @kills = []
-      @score = {}
     end
 
     def player_kill(killer, killed, weapon, kill_time = Time.new)
       @kills << PlayerKill.new(killer, killed, weapon, kill_time)
-      @score[killer] += 1
-      @score[killed] -= 1
     end
 
     def world_kill(killed, killed_by, kill_time = Time.new)
       @kills << WorldKill.new(killed, killed_by, kill_time)
-      @score[killed] -= 1
     end
 
     def add_player(player)
       @players << player
-      @score[player] = 0
     end
 
     def winner
-      @score.map {|player, result| player if result == @score.values.max }.compact
+      players_score = @kills.each_with_object({}) { |kill, players_score|
+        if kill.respond_to?(:killer)
+          players_score[kill.killer] = players_score[kill.killer].nil? ? 1 : players_score[kill.killer] + 1
+        end
+        players_score[kill.killed] = players_score[kill.killed].nil? ? -1 : players_score[kill.killed] - 1
+      }
+
+      players_score.map { |player, score| player if score == players_score.values.max }.compact
     end
 
     def favorite_weapons(player)
