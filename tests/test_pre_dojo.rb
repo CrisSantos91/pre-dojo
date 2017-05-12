@@ -1,15 +1,37 @@
-require "./lib/pre_dojo.rb"
-require "test/unit"
+require './lib/pre_dojo'
+require 'stringio'
+require 'test/unit'
 
 class TestPreDojo < Test::Unit::TestCase
 
-  def log
-    <<~LOG
-      23/04/2013 15:34:22 - New match 11348965 has started
-      23/04/2013 15:36:04 - Roman killed Nick using M16
-      23/04/2013 15:36:33 - <WORLD> killed Nick by DROWN
-      23/04/2013 15:39:22 - Match 11348965 has ended
-    LOG
+  def capture_stdout(&block)
+    old = $stdout
+    $stdout = fake = StringIO.new
+    block.call
+    fake.string
+  ensure
+    $stdout = old
+  end
+
+  def summary
+    <<~SUMMARY
+      Match: 11348965
+      Player: Roman - Kills: 1 - Died: 0
+      Player: Nick - Kills: 0 - Died: 2
+      Winner: Roman - Favorite weapon: M16
+      Best streak: 1
+      Survival Award: Roman
+      5 Kills in 1 minute Award:
+    SUMMARY
+  end
+
+  def test_match_summary
+    pend
+    result = capture_stdout do
+      PreDojo.match_summary
+    end
+
+    assert_equal summary, result
   end
 
   def test_version
