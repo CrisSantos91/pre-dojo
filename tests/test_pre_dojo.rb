@@ -16,19 +16,18 @@ class TestPreDojo < Test::Unit::TestCase
   def summary
     <<~SUMMARY
       Match: 11348965
-      Player: Roman - Kills: 1 - Died: 0
-      Player: Nick - Kills: 0 - Died: 2
+      Player: Roman - Kills: 1 - Deaths: 0
+      Player: Nick - Kills: 0 - Deaths: 2
       Winner: Roman - Favorite weapon: M16
       Best streak: 1
       Survival Award: Roman
-      5 Kills in 1 minute Award:
+      5 Kills in 1 minute Award: 
     SUMMARY
   end
 
   def test_match_summary
-    pend
     result = capture_stdout do
-      PreDojo.match_summary
+      puts PreDojo.match_summary
     end
 
     assert_equal summary, result

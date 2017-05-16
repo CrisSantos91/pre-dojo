@@ -26,9 +26,16 @@ module PreDojo
       @score[killed].add_death
     end
 
-    def add_player(player)
-      @players << player
-      @score[player] = Score.new
+    def player(name)
+      player = @players.find {|existing_player| existing_player.name == name }
+
+      if player.nil?
+        player = Player.new(name)
+        @players << player
+        @score[player] = Score.new
+      end
+
+      player
     end
 
     def winner
@@ -71,7 +78,7 @@ module PreDojo
       }
     end
 
-    def summary     
+    def summary
       summary_str = ''
       summary_str << "Match: #{id}\n"
       @players.each {|player|

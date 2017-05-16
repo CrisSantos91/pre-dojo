@@ -6,24 +6,18 @@ require 'test/unit'
 
 class TestMatch < Test::Unit::TestCase
 
-  def setup
-    @player1 = PreDojo::Player.new('Player 1')
-    @player2 = PreDojo::Player.new('Player 2')
-    @player3 = PreDojo::Player.new('Player 3')
-  end
-
   def create_match_two_players
     match = PreDojo::Match.new(1234)
-    match.add_player(@player1)
-    match.add_player(@player2)
+    @player1 = match.player('Player 1')
+    @player2 = match.player('Player 2')
     match
   end
 
   def create_match_three_players
     match = PreDojo::Match.new(1234)
-    match.add_player(@player1)
-    match.add_player(@player2)
-    match.add_player(@player3)
+    @player1 = match.player('Player 1')
+    @player2 = match.player('Player 2')
+    @player3 = match.player('Player 3')
     match
   end
 
