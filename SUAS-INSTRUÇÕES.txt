@@ -1,2 +1,1 @@
-Coloque aqui suas instruções ou comentários que ache útil/relevantes para possamos ler 
-quando estivermos avaliando a sua solução
+Para executar o programa digitar "ruby pre_dojo.rb" no diretório <projeto>/lib
