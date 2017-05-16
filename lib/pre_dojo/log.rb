@@ -1,3 +1,6 @@
+require_relative 'weapon'
+require_relative 'world_kill'
+
 module PreDojo
   class Log
     

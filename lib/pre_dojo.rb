@@ -26,5 +26,5 @@ module PreDojo
 end
 
 if __FILE__ == $0
-  PreDojo.match_summary("../data/log.txt")
+  puts PreDojo.match_summary("../data/log.txt")
 end
