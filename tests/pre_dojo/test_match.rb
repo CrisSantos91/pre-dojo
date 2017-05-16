@@ -306,15 +306,5 @@ class TestMatch < Test::Unit::TestCase
     match.world_kill(@player3, PreDojo::WorldKill::EARTH_QUAKE, Time.new(2017, 5, 10, 10, 0, 20))
     
     assert_equal summary, match.summary
-
-      # Match: 1234
-      # Player: Player 1 - Kills: 5 - Died: 0
-      # Player: Player 2 - Kills: 4 - Died: 4
-      # Player: Player 3 - Kills: 2 - Died: 8
-      # Winner: Player 1 - Favorite weapon: Bazooka
-      # Best streak: 5
-      # Survival Award: Player 1
-      # 5 Kills in 1 minute Award: Player 1
-
   end
 end
